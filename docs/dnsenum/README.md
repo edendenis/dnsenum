@@ -1,77 +1,79 @@
-README - dnsenum.pl VERSION: 1.2.4
+# Como instalar/configurar/usar o `speedtest-cli` no `Linux Ubuntu`
 
-multithreaded perl script to enumerate DNS information of a domain
-and to discover non-contiguous ip blocks.
+## Resumo
 
-OPERATIONS:
+Neste documento estão contidos os principais comandos e configurações para instalar/configurar/usar o `speedtest-cli` no `Linux Ubuntu`.
 
-	1) Get the host's addresse (A record).
+## _Abstract_
 
-	2) Get the namservers (threaded).
+_This document contains the main commands and settings to install/configure/use the `speedtes-cli` on `Linux Ubuntu`._
 
-	3) Get the MX record (threaded).
+## Descrição [2]
 
-	4) Perform axfr queries on nameservers and get BIND VERSION (threaded).
+### `speedtest-cli`
 
-	5) Get extra names and subdomains via google scraping
-	   (google query = "allinurl: -www site:domain").
+O `speedtest-cli` é uma ferramenta de linha de comando amplamente utilizada para medir a velocidade da conexão à internet de um sistema `Linux`. Baseado no serviço `Speedtest.net`, ele permite aos usuários verificar a largura de banda de download e upload de sua conexão, bem como a latência da rede, tudo a partir da linha de comando. O `speedtest-cli` é uma opção conveniente para administradores de rede, usuários avançados e aqueles que desejam monitorar a qualidade de sua conexão à internet de forma rápida e direta, sem a necessidade de uma interface gráfica. Ele fornece informações valiosas para avaliar o desempenho da rede e solucionar problemas de conectividade.
 
-	6) Brute force subdomains from file, can also perform recursion
-	   on subdomain that have NS records (all threaded).
+## 1. Configurar/Instalar/Usar o `speedtest-cli` no `Linux Ubuntu` [1]
 
-	7) Calculate C class domain network ranges and perform whois
-	   queries on them (threaded).
+Para configurar/instalar/usar o `speedtest-cli` no Ubuntu, você pode usar o gerenciador de pacotes apt. Siga os passos abaixo:
 
-	8) Perform reverse lookups on netranges
-	   ( C class or/and whois netranges) (threaded).
-
-	9) Write to domain_ips.txt file ip-blocks.
-
-Changelog from version 1.2.2
-
-- Fixed GoogleScraping
-- Fixed wildcard issues
-- Changed output function to get rid of errors with new Net::DNS version
-- A bit of cleanup here and there
-- Removed Bind Version detection
-
-PREREQUISITES: 
-
-  Modules that are included in perl 5.10.0:
-	Getopt::Long 
-	IO::File 
-	Thread::Queue
-
-  Other Necessary modules:
-	Must have:
-		Net::IP
-		Net::DNS 
-		Net::Netmask
-	Optional:
-		Net::Whois::IP
-		HTML::Parser
-		WWW::Mechanize
-		XML::Writer
-		
-To install a module, simply run (as root):
-
-perl -MCPAN -e shell
-
-and then type: install <MODULE>
- eg:
-cpan[1]> install XML::Writer
-
-  Perl ithreads support:
-	perl version must be compliled with ithreads support.
-	threads
-	threads::shared
+1. Abra o `Terminal Emulator`. Você pode fazer isso pressionando: `Ctrl + Alt + T`
 
 
-OPTIONS: run "perldoc dnsenum.pl".
+2. Certifique-se de que seu sistema esteja limpo e atualizado.
 
+    2.1 Limpar o `cache` do gerenciador de pacotes `apt`. Especificamente, ele remove todos os arquivos de pacotes (`.deb`) baixados pelo `apt` e armazenados em `/var/cache/apt/archives/`. Digite o seguinte comando: `sudo apt clean` 
+    
+    2.2 Remover pacotes `.deb` antigos ou duplicados do cache local. É útil para liberar espaço, pois remove apenas os pacotes que não podem mais ser baixados (ou seja, versões antigas de pacotes que foram atualizados). Digite o seguinte comando: `sudo apt autoclean`
 
+    2.3 Remover pacotes que foram automaticamente instalados para satisfazer as dependências de outros pacotes e que não são mais necessários. Digite o seguinte comando: `sudo apt autoremove -y`
 
-Special thanks to all Perl  developers.
+    2.4 Buscar as atualizações disponíveis para os pacotes que estão instalados em seu sistema. Digite o seguinte comando e pressione `Enter`: `sudo apt update`
 
-Filip Waeytens		<filip.waeytens[at]gmail.com>	
-tix tixxDZ		<tixxdz[at]gmail.com>
+    2.5 **Corrigir pacotes quebrados**: Isso atualizará a lista de pacotes disponíveis e tentará corrigir pacotes quebrados ou com dependências ausentes: `sudo apt --fix-broken install`
+
+    2.6 Limpar o `cache` do gerenciador de pacotes `apt`. Especificamente, ele remove todos os arquivos de pacotes (`.deb`) baixados pelo `apt` e armazenados em `/var/cache/apt/archives/`. Digite o seguinte comando: `sudo apt clean` 
+    
+    2.7 Para ver a lista de pacotes a serem atualizados, digite o seguinte comando e pressione `Enter`:  `sudo apt list --upgradable`
+
+    2.8 Realmente atualizar os pacotes instalados para as suas versões mais recentes, com base na última vez que você executou `sudo apt update`. Digite o seguinte comando e pressione `Enter`: `sudo apt full-upgrade -y`
+    
+
+3. **Instale o `speedtest-cli`:** Utilize o comando apt para instalar o pacote. `sudo apt install speedtest-cli -y`
+
+4. **Confirme a Instalação:** Após a instalação ser concluída, você pode verificar se o `speedtest-cli` foi instalado com sucesso executando o seguinte comando: `speedtest-cli --version`
+
+Isso deverá mostrar a versão do `speedtest-cli` instalada.
+
+5. **Execute um Teste:** Para fazer um teste de velocidade, simplesmente execute o comando: `speedtest-cli --share`
+
+Pronto! Agora você deve ter o `speedtest-cli` instalado e funcionando em seu sistema Ubuntu.
+
+## 1.1 Código completo para configurar/instalar/usar
+
+Para configurar/instalar/usar o `speedtest` no `Linux Ubuntu` sem precisar digitar linha por linha, você pode seguir estas etapas:
+
+1. Abra o `Terminal Emulator. Você pode fazer isso pressionando: `Ctrl + Alt + T`
+
+2. Digite o seguinte comando e pressione `Enter`:
+
+    ```
+    sudo apt clean
+    sudo apt autoclean
+    sudo apt autoremove
+    sudo apt update -y
+    sudo apt autoremove
+    sudo apt autoclean
+    sudo apt list --upgradable
+    sudo apt full-upgrade -y
+    sudo apt install speedtest-cli -y
+    speedtest-cli --version
+    speedtest-cli --share
+    ```
+
+## Referências
+
+[1] OPENAI. ***Instalar speedtest-cli no ubuntu.*** Disponível em: <https://chat.openai.com/c/09b3a046-d1c5-42ce-b924-ab66e10a2e43> (texto adaptado). ChatGPT. Acessado em: 25/10/2023 10:24.
+
+[2] OPENAI. ***Vs code: editor popular.*** Disponível em: <https://chat.openai.com/c/b640a25d-f8e3-4922-8a3b-ed74a2657e42> (texto adaptado). ChatGPT. Acessado em: 16/11/2023 10:06.
